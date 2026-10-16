@@ -76,7 +76,7 @@ Gracz steruje kulą za pomocą klawiszy WASD. Interakcja z obiektami polega na i
 8. Sposób dystrybucji – w jakich kanałach prowadzona będzie sprzedaż/ promocja
 
 
-- Twitter/X - promocja gry, zwiastuny, stworzenie społeczności
+- Twitter/X – promocja gry, zwiastuny, stworzenie społeczności
 
 - Steam – promocja gry, zwiastuny
 
