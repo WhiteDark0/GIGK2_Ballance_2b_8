@@ -65,7 +65,7 @@ Dodatkowe dźwięki:
 7. Interfejs użytkownika, sterowanie grą – sposób prowadzenia rozgrywki
 
 
-Gracz steruje kulą za pomocą przycisków poruszania w czterech kierunkach. Interakcja z obiektami polega na ich dotknięciu bądź przepchaniu – brak dedykowanego przycisku interakcji. Kamera umieszczona jest zawsze pod tym samym kątem, ale gracz ma możliwość zmiany jej kierunku patrzenia, tak by móc wybrać dogodny widok bądź spojrzeć na tor z nieco innej perspektywy. W trakcie poziomu kula będzie zmieniać materiał, z którego jest wykonana poprzez interakcje z transformatorami.
+Gracz steruje kulą za pomocą klawiszy WASD. Interakcja z obiektami polega na ich dotknięciu bądź przepchaniu – brak dedykowanego przycisku interakcji. Kamera umieszczona jest zawsze pod tym samym kątem, ale gracz ma możliwość zmiany jej kierunku patrzenia za pomocą przycisków Q oraz E, tak by móc wybrać dogodny widok bądź spojrzeć na tor z nieco innej perspektywy. Kamera może być podniesiona za pomocą spacji. Naciśnięcie klawisza ESC spowoduje przejście do menu pauzy, z którego poziomu gracz może powrócić do rozgrywki bądź wyjść z gry. W trakcie poziomu kula będzie zmieniać materiał, z którego jest wykonana poprzez interakcje z transformatorami.
 
 
 8. Sposób dystrybucji – w jakich kanałach prowadzona będzie sprzedaż/ promocja
