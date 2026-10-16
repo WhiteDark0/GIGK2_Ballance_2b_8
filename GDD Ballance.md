@@ -30,10 +30,8 @@ Dawid Pawlica
 
 
 
-1. Fabuła – opis historii prezentowanej przez grę. W zależności od typu rozbudowana (RPG) lub prosta (zręcznościowa)
+1. Wprowadzenie do pomysłu
 
-
-Brak głębszej historii zawartej w grze, gracz ma za zadanie przejść poziomy.
 
 
 2. Postacie – wprowadza avatarów i NPC, którzy będą obecni w grze
