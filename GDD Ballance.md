@@ -30,6 +30,8 @@ Każdy poziom rozgrywa się na betonowych platformach umieszczonych w powietrzu.
 
 
 Gracz do dyspozycji będzie miał określoną ilość poziomów. Poziomy powinny stopniowo wprowadzać kolejne mechaniki, by zaznajomić z nimi gracza, a dalsze poziomy powinny łączyć wiele mechanik razem w ramach jednej “zagadki”. Po przejściu danego poziomu gracz będzie oceniany punktowo – im szybciej gracz go przejdzie, tym więcej punktów otrzyma. Na wynik będzie też wpływać liczba pozostałych żyć.
+W trakcie poziomu kula będzie zmieniać materiał, z którego jest wykonana poprzez interakcje z transformatorami. W wybranych miejscach poziomu umieszczone będą punkty kontrolne – jeśli gracz spadnie z platformy bądź w dowolny inny sposób doprowadzi do uśmiercenia swojej postaci, to kula powróci na miejsce ostatnio aktywowanego punktu kontrolnego, pod warunkiem że gracz ma jeszcze pozostałe życia. Możliwe jest też zebranie dodatkowych żyć, które będą dolączały do puli trzech żyć, z którymi rozpoczyna się każdy poziom. Uśmiercenie postaci z pustą pulą żyć wymusza na graczu restart poziomu.
+Gracz będzie musiał uważać na obiekty, które spowodują bądź mogą spowodować jego porażkę - kolce wystające z ziemi natychmiast uśmiercają kulę, a niektóre z drewnianych platform będą widocznie uszkodzone i po kilku sekundach od pierwszego kontaktu gracza z powierzchnią rozpadną się całkowicie, a kula spadnie w przepaść.
 
 
 
@@ -65,8 +67,8 @@ Dodatkowe dźwięki:
 7. Interfejs użytkownika, sterowanie grą – sposób prowadzenia rozgrywki
 
 
-Po uruchomieniu gry gracz ujrzy menu główne, które pozwala na dostosowanie ustawień, rozpoczęcie rozgrywki na wybranym poziomie, zobaczenie listy autorów oraz wyjście z gry
-Gracz steruje kulą za pomocą klawiszy WASD. Interakcja z obiektami polega na ich dotknięciu bądź przepchaniu – brak dedykowanego przycisku interakcji. Kamera umieszczona jest zawsze pod tym samym kątem, ale gracz ma możliwość zmiany jej kierunku patrzenia za pomocą przycisków Q oraz E, tak by móc wybrać dogodny widok bądź spojrzeć na tor z nieco innej perspektywy. Kamera może być podniesiona za pomocą spacji. Naciśnięcie klawisza ESC spowoduje przejście do menu pauzy, z którego poziomu gracz może powrócić do rozgrywki bądź wrócić do menu głównego. W trakcie poziomu kula będzie zmieniać materiał, z którego jest wykonana poprzez interakcje z transformatorami. W wybranych miejscach poziomu umieszczone będą punkty kontrolne – jeśli gracz spadnie z platformy bądź w dowolny inny sposób doprowadzi do uśmiercenia swojej postaci, to kula powróci na miejsce ostatnio aktywowanego punktu kontrolnego, pod warunkiem że gracz ma jeszcze pozostałe życia. Możliwe jest też zebranie dodatkowych żyć, które będą dolączały do puli trzech żyć, z którymi rozpoczyna się każdy poziom. Uśmiercenie postaci z pusą pulą żyć wymusza na graczu restart poziomu.
+Po uruchomieniu gry gracz ujrzy menu główne, które pozwala na dostosowanie ustawień, rozpoczęcie rozgrywki na wybranym poziomie, zobaczenie listy autorów oraz wyjście z gry.
+Gracz steruje kulą za pomocą klawiszy WASD. Interakcja z obiektami polega na ich dotknięciu bądź przepchaniu – brak dedykowanego przycisku interakcji. Kamera umieszczona jest zawsze pod tym samym kątem, ale gracz ma możliwość zmiany jej kierunku patrzenia za pomocą przycisków Q oraz E, tak by móc wybrać dogodny widok bądź spojrzeć na tor z nieco innej perspektywy. Kamera może być podniesiona za pomocą spacji. Naciśnięcie klawisza ESC spowoduje przejście do menu pauzy, z którego poziomu gracz może powrócić do rozgrywki bądź wrócić do menu głównego. 
 
 
 8. Sposób dystrybucji – w jakich kanałach prowadzona będzie sprzedaż/ promocja
