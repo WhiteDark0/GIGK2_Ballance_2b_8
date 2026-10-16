@@ -10,26 +10,6 @@
 
 
 
-
-
-
-Wykonane przez:
-
-Artur Piwowarczyk
-
-Dawid Pawlica
-
-Łukasz Skrzypek
-
-
-
-
-
-
-
-
-
-
 1. Wprowadzenie do pomysłu
 
 
@@ -126,3 +106,15 @@ Powód:
 Szkice:
 
 ![](GDD_Sketch.png)
+
+
+
+
+
+Wykonane przez:
+
+Artur Piwowarczyk
+
+Dawid Pawlica
+
+Łukasz Skrzypek
