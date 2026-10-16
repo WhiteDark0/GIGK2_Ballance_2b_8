@@ -10,25 +10,25 @@
 
 
 
-1. Wprowadzenie do pomysłu
+# 1. Wprowadzenie do pomysłu
 
 
 Ballance jest prostą grą logiczną 3D, która zawiera również elementy zręcznościowe. Gracz kontroluje kulę, a jego celem jest przejście kolejnych poziomów unikając przeszkód i nie spadając z platform. Początkowo planowane jest utworzenie jednego poziomu z możliwością dodania następnych w przyszłości.
 
 
-2. Postacie – wprowadza avatarów i NPC, którzy będą obecni w grze
+# 2. Postacie – wprowadza avatarów i NPC, którzy będą obecni w grze
 
 
 Jedna postać, którą steruje gracz – kula tocząca się od początku do końca poziomu. Brak NPC.
 
 
-3. Projekt poziomu/środowiska – projekt świata w jakim będzie realizowana gra.
+# 3. Projekt poziomu/środowiska – projekt świata w jakim będzie realizowana gra.
 
 
 Każdy poziom rozgrywa się na betonowych platformach umieszczonych w powietrzu. Poszczególne platformy są połączone drewnianymi mostami bądź metalowymi prowadnicami, a część z nich jest niepołączona żadną ciągłą ścieżką i wymaga sprawnego poruszania się po mniejszych platformach wyspach.
 
 
-4. Rozgrywka – w jaki sposób realizowana będzie rozgrywka
+# 4. Rozgrywka – w jaki sposób realizowana będzie rozgrywka
 
 
 Gracz do dyspozycji będzie miał określoną ilość poziomów. Poziomy powinny stopniowo wprowadzać kolejne mechaniki, by zaznajomić z nimi gracza, a dalsze poziomy powinny łączyć wiele mechanik razem w ramach jednej “zagadki”. Po przejściu danego poziomu gracz będzie oceniany punktowo – im szybciej gracz go przejdzie, tym więcej punktów otrzyma. Na wynik będzie też wpływać liczba pozostałych żyć.
@@ -37,13 +37,13 @@ Gracz będzie musiał uważać na obiekty, które spowodują bądź mogą spowod
 
 
 
-5. Sztuka – jakie elementy graficzne będą wykorzystane, w jakim stylu 
+# 5. Sztuka – jakie elementy graficzne będą wykorzystane, w jakim stylu 
 
 
 Styl graficzny gry za pomocą prostej grafiki trójwymiarowej odwzorowuje wygląd obiektów zbliżony do rzeczywistości - platformy teksturą betonu, mosty – drewna, prowadnice – metalu typu aluminium. Skybox będący teksturą nieba - zależnie od poziomu w różnym porach dnia.
 
 
-6. Dźwięk i muzyka – opis strony dźwiękowej gry
+# 6. Dźwięk i muzyka – opis strony dźwiękowej gry
 
 
 Menu będzie zawierało inną muzykę niż w rozgrywce. Podczas rozgrywki będzie towarzyszyć muzyka zmieniana co nowy poziom. Gatunek muzyki powinien być ambientowy – mający spokojny nastrój, tak by nie rozpraszać gracza, ale też nie tworzyć w nim poczucia wybrakowania.
@@ -66,14 +66,14 @@ Dodatkowe dźwięki:
 - Interfejs menu
 
 
-7. Interfejs użytkownika, sterowanie grą – sposób prowadzenia rozgrywki
+# 7. Interfejs użytkownika, sterowanie grą – sposób prowadzenia rozgrywki
 
 
 Po uruchomieniu gry gracz ujrzy menu główne, które pozwala na dostosowanie ustawień, rozpoczęcie rozgrywki na wybranym poziomie, zobaczenie listy autorów oraz wyjście z gry.
 Gracz steruje kulą za pomocą klawiszy WASD. Interakcja z obiektami polega na ich dotknięciu bądź przepchaniu – brak dedykowanego przycisku interakcji. Kamera umieszczona jest zawsze pod tym samym kątem, ale gracz ma możliwość zmiany jej kierunku patrzenia za pomocą przycisków Q oraz E, tak by móc wybrać dogodny widok bądź spojrzeć na tor z nieco innej perspektywy. Kamera może być podniesiona za pomocą spacji. Naciśnięcie klawisza ESC spowoduje przejście do menu pauzy, z którego poziomu gracz może powrócić do rozgrywki bądź wrócić do menu głównego. 
 
 
-8. Sposób dystrybucji – w jakich kanałach prowadzona będzie sprzedaż/ promocja
+# 8. Sposób dystrybucji – w jakich kanałach prowadzona będzie sprzedaż/ promocja
 
 
 - Twitter/X – promocja gry, zwiastuny, stworzenie społeczności
@@ -85,7 +85,7 @@ Gracz steruje kulą za pomocą klawiszy WASD. Interakcja z obiektami polega na i
 - Strona internetowa – promocja gry, zwiastuny
 
 
-9. Model finansowania – w jakim wymiarze rozwiązanie będzie finansowane.
+# 9. Model finansowania – w jakim wymiarze rozwiązanie będzie finansowane.
 
 
 Powód:
@@ -108,7 +108,7 @@ Powód:
 
 
 
-Szkice:
+# Szkice:
 
 ![](GDD_Sketch.png)
 
@@ -116,7 +116,7 @@ Szkice:
 
 
 
-Wykonane przez:
+# Wykonane przez:
 
 Artur Piwowarczyk
 
