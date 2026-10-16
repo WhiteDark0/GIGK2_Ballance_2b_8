@@ -13,6 +13,8 @@
 1. Wprowadzenie do pomysłu
 
 
+Ballance jest prostą grą logiczną 3D, która zawiera również elementy zręcznościowe. Gracz kontroluje kulę, a jego celem jest przejście kolejnych poziomów unikając przeszkód i nie spadając z platform. Początkowo planowane jest utworzenie jednego poziomu z możliwością dodania następnych w przyszłości.
+
 
 2. Postacie – wprowadza avatarów i NPC, którzy będą obecni w grze
 
