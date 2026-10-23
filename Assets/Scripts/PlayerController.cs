@@ -14,6 +14,12 @@ public class PlayerController : MonoBehaviour
     private float timer;
     public float delayAmount = 0.5f;
     public bool isGameOver;
+    private Camera mainCamera;
+
+    private void Awake()
+    {
+        mainCamera = Camera.main;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,7 +34,18 @@ public class PlayerController : MonoBehaviour
     {
         if (isGameOver) return;
 
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+        // Get main camera's direction
+        Vector3 camForward = mainCamera.transform.forward;
+        Vector3 camRight = mainCamera.transform.right;
+
+        // Ignore y
+        camForward.y = 0f;
+        camRight.y = 0f;
+
+        camForward.Normalize();
+        camRight.Normalize();
+
+        Vector3 movement = (camForward * movementY + camRight * movementX);
         rb.AddForce(movement * speed);
     }
 
