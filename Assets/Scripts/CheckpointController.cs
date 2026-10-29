@@ -71,6 +71,24 @@ namespace Assets.Scripts
             Debug.Log($"Saved states for {_savedObjectStates.Count} objects at checkpoint.");
         }
 
+        public void RestoreObjects()
+        {
+            foreach (var saveable in _registeredObjects)
+            {
+                if (saveable == null) continue;
+
+                if (_hasCheckpoint && _savedObjectStates.TryGetValue(saveable.UniqueID, out var state))
+                {
+                    saveable.RestoreState(state);
+                }
+                else
+                {
+                    // If dying before hitting any checkpoint, reset to default active state
+                    saveable.ResetToDefault();
+                }
+            }
+        }
+
         public void ClearCheckpoints()
         {
             _lastCheckpointPositon = Vector3.zero;

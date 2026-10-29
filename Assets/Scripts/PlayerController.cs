@@ -123,6 +123,7 @@ public class PlayerController : MonoBehaviour
         if (Assets.Scripts.CheckpointController.Instance != null)
         {
             Assets.Scripts.CheckpointController.Instance.SetPlayer(this);
+            Assets.Scripts.CheckpointController.Instance.RestoreObjects();
         }
 
         isRespawning = false;

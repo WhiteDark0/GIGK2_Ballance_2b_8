@@ -5,7 +5,9 @@ using UnityEngine;
 public class SaveableObject : MonoBehaviour
 {
     private string _uniqueID;
+    [SerializeField]
     private bool _saveTransform = false; // Set to true for obstacles and other moveable objects
+    private bool _initialActiveState;
 
     public string UniqueID => _uniqueID;
 
@@ -25,6 +27,8 @@ public class SaveableObject : MonoBehaviour
         // Register the object with the CheckpointController
         CheckpointController.Instance.RegisterSaveable(this);
 
+        _initialActiveState = gameObject.activeSelf;
+
         // Load the saved state if it exists
         if (CheckpointController.Instance.TryGetSavedState(_uniqueID, out ObjectState savedState))
         {
@@ -36,6 +40,16 @@ public class SaveableObject : MonoBehaviour
                 transform.rotation = savedState.Rotation;
             }
         }
+    }
+
+    public void RestoreState(ObjectState state)
+    {
+        gameObject.SetActive(state.IsActive);
+    }
+
+    public void ResetToDefault()
+    {
+        gameObject.SetActive(_initialActiveState);
     }
 
     public ObjectState CaptureState()
