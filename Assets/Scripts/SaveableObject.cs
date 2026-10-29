@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SaveableObject : MonoBehaviour
 {
+    [SerializeField]
     private string _uniqueID;
     [SerializeField]
     private bool _saveTransform = false; // Set to true for obstacles and other moveable objects
@@ -11,7 +12,7 @@ public class SaveableObject : MonoBehaviour
 
     public string UniqueID => _uniqueID;
 
-    private void OnValidate()
+    private void Awake()
     {
         if (string.IsNullOrEmpty(_uniqueID))
         {
