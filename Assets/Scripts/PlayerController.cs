@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
@@ -84,7 +86,16 @@ public class PlayerController : MonoBehaviour
             // Stop the ball
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
+
+            // Restart the level after 3 seconds
+            StartCoroutine(restartLevel());
         }
+    }
+
+    IEnumerator restartLevel()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void OnMove(InputValue movementValue)
