@@ -137,6 +137,14 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
             score += 220;
             SetScoreText();
+            playerAudio.PlayExtraPointsSound();
+        }
+        if (other.gameObject.CompareTag("ExtraLife"))
+        {
+            other.gameObject.SetActive(false);
+            lives++;
+            SetLivesText();
+            playerAudio.PlayExtraLifeSound();
         }
         if (other.gameObject.CompareTag("Finish"))
         {

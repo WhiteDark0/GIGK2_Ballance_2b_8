@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5989097847894140990}
   m_Layer: 0
   m_Name: Rods_Left
-  m_TagString: Untagged
+  m_TagString: Material_Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

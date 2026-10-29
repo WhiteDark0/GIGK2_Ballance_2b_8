@@ -7,6 +7,9 @@ TagManager:
   - PointExtra
   - Manager
   - Checkpoint
+  - Material_Concrete
+  - Material_Metal
+  - ExtraLife
   layers:
   - Default
   - TransparentFX
