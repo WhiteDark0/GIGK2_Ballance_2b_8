@@ -8,7 +8,10 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI livesText;
     public TextMeshProUGUI endText;
+    public TextMeshProUGUI gameOverText;
+    private Vector3 _initialSpawnPosition;
     private Rigidbody rb;
 
     private int score;
@@ -19,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private float timer;
     public float delayAmount = 0.5f;
     public bool isGameOver;
+    public bool isRespawning;
     private Camera mainCamera;
 
     private void Awake()
@@ -29,10 +33,13 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _initialSpawnPosition = transform.position;
         endText.gameObject.SetActive(false);
+        gameOverText.gameObject.SetActive(false);
         rb = GetComponent<Rigidbody>();
         score = 1000;
         SetScoreText();
+        SetLivesText();
 
         // Set the player in the CheckpointController
         Assets.Scripts.CheckpointController.Instance.SetPlayer(this);
@@ -40,7 +47,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isGameOver) return;
+        if (isGameOver || isRespawning) return;
 
         // Get main camera's direction
         Vector3 camForward = mainCamera.transform.forward;
@@ -59,7 +66,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (isGameOver) return;
+        if (isGameOver || isRespawning) return;
 
         timer += Time.deltaTime;
 
@@ -70,15 +77,51 @@ public class PlayerController : MonoBehaviour
             SetScoreText();
         }
 
-        if(this.transform.position.y < -10f)
+        if(this.transform.position.y < -10f && !isRespawning)
         {
-            lives--;
-            if (lives <= 0)
-            {
-                isGameOver = true;
-                StartCoroutine(restartLevel());
-            }
+            StartCoroutine(Respawn());
         }
+    }
+
+    private IEnumerator Respawn()
+    {
+        isRespawning = true;
+        lives--;
+        SetLivesText();
+
+        if (lives <= 0)
+        {
+            isGameOver = true;
+            gameOverText.gameObject.SetActive(true);
+
+            if (Assets.Scripts.CheckpointController.Instance != null)
+            {
+                Assets.Scripts.CheckpointController.Instance.ClearCheckpoints();
+            }
+
+            yield return new WaitForSeconds(5f);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            yield break;
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        // Restore default player values
+        transform.position = _initialSpawnPosition;
+        score = 1000;
+        timer = 0f;
+        SetScoreText();
+
+        // If there's a checkpoint, the controller will restore the player to that position and score
+        if (Assets.Scripts.CheckpointController.Instance != null)
+        {
+            Assets.Scripts.CheckpointController.Instance.SetPlayer(this);
+        }
+
+        isRespawning = false;
     }
 
     void OnTriggerEnter(Collider other)
@@ -93,9 +136,12 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Finish"))
         {
+            score += lives * 200; // Bonus points for remaining lives
+
             isGameOver = true;
             other.gameObject.SetActive(false);
             scoreText.gameObject.SetActive(false);
+            livesText.gameObject.SetActive(false);
             endText.text += "\nScore: " + score;
             endText.gameObject.SetActive(true);
 
@@ -103,7 +149,8 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
 
-            // Restart the level after 3 seconds
+            // Restart the level from scratch after 10 seconds
+            Assets.Scripts.CheckpointController.Instance.ClearCheckpoints();
             StartCoroutine(restartLevel());
         }
         if (other.gameObject.CompareTag("Checkpoint"))
@@ -115,7 +162,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator restartLevel()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(10f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -124,6 +171,7 @@ public class PlayerController : MonoBehaviour
         this.transform.position = savedPosition;
         this.score = savedScore;
         SetScoreText();
+        SetLivesText();
 
         // Reset the ball's velocity
         if (rb != null)
@@ -145,5 +193,10 @@ public class PlayerController : MonoBehaviour
     void SetScoreText()
     {
         scoreText.text = "Score: " + score.ToString();
+    }
+
+    void SetLivesText()
+    {
+        livesText.text = "Lives: " + lives.ToString();
     }
 }
