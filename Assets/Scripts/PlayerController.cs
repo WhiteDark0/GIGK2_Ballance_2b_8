@@ -24,10 +24,12 @@ public class PlayerController : MonoBehaviour
     public bool isGameOver;
     public bool isRespawning;
     private Camera mainCamera;
+    private PlayerAudio playerAudio;
 
     private void Awake()
     {
         mainCamera = Camera.main;
+        playerAudio = GetComponent<PlayerAudio>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -88,6 +90,8 @@ public class PlayerController : MonoBehaviour
         isRespawning = true;
         lives--;
         SetLivesText();
+
+        playerAudio.PlayFallDownSound();
 
         if (lives <= 0)
         {
