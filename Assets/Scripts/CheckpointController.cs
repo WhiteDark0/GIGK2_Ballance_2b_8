@@ -11,7 +11,6 @@ namespace Assets.Scripts
         public static CheckpointController Instance { get; private set; }
         private Vector3 _lastCheckpointPositon;
         private int _lastScore;
-        private byte _lastLives;
         private bool _hasCheckpoint;
         private readonly List<SaveableObject> _registeredObjects = new List<SaveableObject>();
         private readonly Dictionary<string, ObjectState> _savedObjectStates = new Dictionary<string, ObjectState>();
@@ -34,7 +33,7 @@ namespace Assets.Scripts
         {
             if(_hasCheckpoint)
             {
-                player.RestoreFromCheckpoint(_lastCheckpointPositon, _lastScore, _lastLives);
+                player.RestoreFromCheckpoint(_lastCheckpointPositon, _lastScore);
             }
         }
 
@@ -51,12 +50,11 @@ namespace Assets.Scripts
             return _savedObjectStates.TryGetValue(uniqueId, out state);
         }
 
-        public void SetCheckpoint(Vector3 checkpointPosition, int score, byte lives)
+        public void SetCheckpoint(Vector3 checkpointPosition, int score)
         {
             _lastCheckpointPositon = checkpointPosition;
             _lastScore = score;
-            _lastLives = lives;
-            Debug.Log($"Checkpoint set at position: {_lastCheckpointPositon}, score: {_lastScore}, lives: {_lastLives}");
+            Debug.Log($"Checkpoint set at position: {_lastCheckpointPositon}, score: {_lastScore}");
 
             _savedObjectStates.Clear();
             foreach (var saveable in _registeredObjects)
