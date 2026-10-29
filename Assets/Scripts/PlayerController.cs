@@ -168,7 +168,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Checkpoint"))
         {
             other.gameObject.SetActive(false);
-            Assets.Scripts.CheckpointController.Instance.SetCheckpoint(other.transform.position, score);
+            Assets.Scripts.CheckpointController.Instance.SetCheckpoint(other.transform.position, score, lives);
         }
     }
 
@@ -178,10 +178,11 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void RestoreFromCheckpoint(Vector3 savedPosition, int savedScore)
+    public void RestoreFromCheckpoint(Vector3 savedPosition, int savedScore, byte savedLives)
     {
         this.transform.position = savedPosition;
         this.score = savedScore;
+        this.lives = savedLives;
         SetScoreText();
         SetLivesText();
 
@@ -190,8 +191,8 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-        }
-        Debug.Log($"Restored from checkpoint at position: {savedPosition}, score: {savedScore}");
+        }   
+        Debug.Log($"Restored from checkpoint at position: {savedPosition}, score: {savedScore}, lives: {savedLives}");
     }
 
     void OnMove(InputValue movementValue)
