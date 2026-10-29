@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 public class CameraController : MonoBehaviour
 {
     public GameObject player;
+
+    private Vector3 defaultOffset = new Vector3(0f, 10f, -10f);
     private Vector3 offset;
 
     InputAction moveLeftAction;
@@ -18,12 +20,17 @@ public class CameraController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        offset = transform.position - player.transform.position;
+        offset = defaultOffset;
         moveLeftAction = InputSystem.actions.FindAction("LookLeft");
         moveRightAction = InputSystem.actions.FindAction("LookRight");
 
         targetOffset = offset;
         targetRotation = transform.rotation;
+
+        if(player != null)
+        {
+            transform.position = player.transform.position + offset;
+        }
     }
 
     // Update is called once per frame
