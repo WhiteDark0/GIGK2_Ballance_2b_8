@@ -10,7 +10,10 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI endText;
     private Rigidbody rb;
+
     private int score;
+    private byte lives = 3;
+
     private float movementX;
     private float movementY;
     private float timer;
@@ -30,6 +33,9 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         score = 1000;
         SetScoreText();
+
+        // Set the player transform in the CheckpointController
+        Assets.Scripts.CheckpointController.Instance.SetPlayerTransform(this.transform);
     }
 
     void FixedUpdate()
@@ -63,6 +69,16 @@ public class PlayerController : MonoBehaviour
             score--;
             SetScoreText();
         }
+
+        if(this.transform.position.y < -10f)
+        {
+            lives--;
+            if (lives <= 0)
+            {
+                isGameOver = true;
+                StartCoroutine(restartLevel());
+            }
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -89,6 +105,11 @@ public class PlayerController : MonoBehaviour
 
             // Restart the level after 3 seconds
             StartCoroutine(restartLevel());
+        }
+        if (other.gameObject.CompareTag("Checkpoint"))
+        {
+            other.gameObject.SetActive(false);
+            Assets.Scripts.CheckpointController.Instance.SetCheckpoint(other.transform.position);
         }
     }
 

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - PointExtra
+  - Manager
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
