@@ -12,6 +12,8 @@ namespace Assets.Scripts
         private Vector3 _lastCheckpointPositon;
         private int _lastScore;
         private bool _hasCheckpoint;
+        private readonly List<SaveableObject> _registeredObjects = new List<SaveableObject>();
+        private readonly Dictionary<string, ObjectState> _savedObjectStates = new Dictionary<string, ObjectState>();
 
         void Awake()
         {
@@ -35,12 +37,45 @@ namespace Assets.Scripts
             }
         }
 
+        public void RegisterSaveable(SaveableObject saveable)
+        {
+            if (!_registeredObjects.Contains(saveable))
+            {
+                _registeredObjects.Add(saveable);
+            }
+        }
+
+        public bool TryGetSavedState(string uniqueId, out ObjectState state)
+        {
+            return _savedObjectStates.TryGetValue(uniqueId, out state);
+        }
+
         public void SetCheckpoint(Vector3 checkpointPosition, int score)
         {
             _lastCheckpointPositon = checkpointPosition;
             _lastScore = score;
-            _hasCheckpoint = true;
             Debug.Log($"Checkpoint set at position: {_lastCheckpointPositon}, score: {_lastScore}");
+
+            _savedObjectStates.Clear();
+            foreach (var saveable in _registeredObjects)
+            {
+                if (saveable != null)
+                {
+                    _savedObjectStates[saveable.UniqueID] = saveable.CaptureState();
+                }
+            }
+
+            _hasCheckpoint = true;
+            Debug.Log($"Saved states for {_savedObjectStates.Count} objects at checkpoint.");
+        }
+
+        public void ClearCheckpoints()
+        {
+            _lastCheckpointPositon = Vector3.zero;
+            _lastScore = 0;
+            _hasCheckpoint = false;
+            _registeredObjects.Clear();
+            _savedObjectStates.Clear();
         }
     }
 
