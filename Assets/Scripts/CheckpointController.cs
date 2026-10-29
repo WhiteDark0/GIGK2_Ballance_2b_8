@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace Assets.Scripts
 {
     public class CheckpointController : MonoBehaviour
     {
         public static CheckpointController Instance { get; private set; }
-        public Transform PlayerTransform { get; private set; }
         private Vector3 _lastCheckpointPositon;
+        private int _lastScore;
+        private bool _hasCheckpoint;
 
         void Awake()
         {
@@ -25,20 +27,20 @@ namespace Assets.Scripts
             }
         }
 
-        public void SetPlayerTransform(Transform playerTransform)
+        public void SetPlayer(PlayerController player)
         {
-            PlayerTransform = playerTransform;
-
-            // If a checkpoint has already been reached, move the player to that position
-            if(_lastCheckpointPositon != Vector3.zero)
+            if(_hasCheckpoint)
             {
-                PlayerTransform.position = _lastCheckpointPositon;
+                player.RestoreFromCheckpoint(_lastCheckpointPositon, _lastScore);
             }
         }
 
-        public void SetCheckpoint(Vector3 checkpointPosition)
+        public void SetCheckpoint(Vector3 checkpointPosition, int score)
         {
             _lastCheckpointPositon = checkpointPosition;
+            _lastScore = score;
+            _hasCheckpoint = true;
+            Debug.Log($"Checkpoint set at position: {_lastCheckpointPositon}, score: {_lastScore}");
         }
     }
 

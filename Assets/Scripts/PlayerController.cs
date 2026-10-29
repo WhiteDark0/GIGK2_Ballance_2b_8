@@ -34,8 +34,8 @@ public class PlayerController : MonoBehaviour
         score = 1000;
         SetScoreText();
 
-        // Set the player transform in the CheckpointController
-        Assets.Scripts.CheckpointController.Instance.SetPlayerTransform(this.transform);
+        // Set the player in the CheckpointController
+        Assets.Scripts.CheckpointController.Instance.SetPlayer(this);
     }
 
     void FixedUpdate()
@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Checkpoint"))
         {
             other.gameObject.SetActive(false);
-            Assets.Scripts.CheckpointController.Instance.SetCheckpoint(other.transform.position);
+            Assets.Scripts.CheckpointController.Instance.SetCheckpoint(other.transform.position, score);
         }
     }
 
@@ -117,6 +117,21 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void RestoreFromCheckpoint(Vector3 savedPosition, int savedScore)
+    {
+        this.transform.position = savedPosition;
+        this.score = savedScore;
+        SetScoreText();
+
+        // Reset the ball's velocity
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+        Debug.Log($"Restored from checkpoint at position: {savedPosition}, score: {savedScore}");
     }
 
     void OnMove(InputValue movementValue)
