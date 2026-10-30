@@ -5,6 +5,7 @@ public class PlayerAudio : MonoBehaviour
     [SerializeField] private AudioClip FallDownClip;
     [SerializeField] private AudioClip ExtraPointsClip;
     [SerializeField] private AudioClip ExtraLifeClip;
+    [SerializeField] private AudioClip TransformClip;
 
 
     [SerializeField]
@@ -19,4 +20,5 @@ public class PlayerAudio : MonoBehaviour
     public void PlayFallDownSound() => audioSource.PlayOneShot(FallDownClip);
     public void PlayExtraPointsSound() => audioSource.PlayOneShot(ExtraPointsClip);
     public void PlayExtraLifeSound() => audioSource.PlayOneShot(ExtraLifeClip);
+    public void PlayTransformSound() => audioSource.PlayOneShot(TransformClip);
 }

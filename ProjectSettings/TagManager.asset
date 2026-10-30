@@ -11,6 +11,7 @@ TagManager:
   - Material_Metal
   - ExtraLife
   - Material_Wood
+  - Transformer
   layers:
   - Default
   - TransparentFX

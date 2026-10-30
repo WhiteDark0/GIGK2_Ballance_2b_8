@@ -25,11 +25,13 @@ public class PlayerController : MonoBehaviour
     public bool isRespawning;
     private Camera mainCamera;
     private PlayerAudio playerAudio;
+    private TransformationManager transformationManager;
 
     private void Awake()
     {
         mainCamera = Camera.main;
         playerAudio = GetComponent<PlayerAudio>();
+        transformationManager = GetComponent<TransformationManager>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -115,6 +117,7 @@ public class PlayerController : MonoBehaviour
 
         // Restore default player values
         transform.position = _initialSpawnPosition;
+        transformationManager.ResetToDefault();
         score = 1000;
         timer = 0f;
         SetScoreText();
@@ -147,6 +150,17 @@ public class PlayerController : MonoBehaviour
             SetLivesText();
             playerAudio.PlayExtraLifeSound();
         }
+        if(other.gameObject.CompareTag("Transformer"))
+        {
+            other.gameObject.SetActive(false);
+            // Get the touched transformer's component and apply the transformation using the TransformationManager
+            Transformer transformer = other.GetComponent<Transformer>();
+            if (transformer != null && transformationManager != null)
+            {
+                transformationManager.ApplyTransformation(transformer.TargetForm);
+            }
+            playerAudio.PlayTransformSound();
+        }
         if (other.gameObject.CompareTag("Finish"))
         {
             score += lives * 200; // Bonus points for remaining lives
@@ -161,6 +175,7 @@ public class PlayerController : MonoBehaviour
             // Stop the ball
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
+            transformationManager.ResetToDefault();
 
             // Restart the level from scratch after 10 seconds
             Assets.Scripts.CheckpointController.Instance.ClearCheckpoints();
@@ -169,7 +184,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Checkpoint"))
         {
             other.gameObject.SetActive(false);
-            Assets.Scripts.CheckpointController.Instance.SetCheckpoint(other.transform.position, score);
+            Assets.Scripts.CheckpointController.Instance.SetCheckpoint(other.transform.position, score, transformationManager.CurrentForm);
         }
     }
 
@@ -179,12 +194,13 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void RestoreFromCheckpoint(Vector3 savedPosition, int savedScore)
+    public void RestoreFromCheckpoint(Vector3 savedPosition, int savedScore, TransformationManager.PlayerMaterialType savedForm)
     {
         this.transform.position = savedPosition;
         this.score = savedScore;
         SetScoreText();
         SetLivesText();
+        transformationManager.ApplyTransformation(savedForm);
 
         // Reset the ball's velocity
         if (rb != null)
@@ -192,7 +208,7 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }   
-        Debug.Log($"Restored from checkpoint at position: {savedPosition}, score: {savedScore}");
+        Debug.Log($"Restored from checkpoint at position: {savedPosition}, score: {savedScore}, form: {savedForm}");
     }
 
     void OnMove(InputValue movementValue)

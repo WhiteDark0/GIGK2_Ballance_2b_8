@@ -11,6 +11,7 @@ namespace Assets.Scripts
         public static CheckpointController Instance { get; private set; }
         private Vector3 _lastCheckpointPositon;
         private int _lastScore;
+        private TransformationManager.PlayerMaterialType _lastForm;
         private bool _hasCheckpoint;
         private readonly List<SaveableObject> _registeredObjects = new List<SaveableObject>();
         private readonly Dictionary<string, ObjectState> _savedObjectStates = new Dictionary<string, ObjectState>();
@@ -33,7 +34,7 @@ namespace Assets.Scripts
         {
             if(_hasCheckpoint)
             {
-                player.RestoreFromCheckpoint(_lastCheckpointPositon, _lastScore);
+                player.RestoreFromCheckpoint(_lastCheckpointPositon, _lastScore, _lastForm);
             }
         }
 
@@ -50,11 +51,12 @@ namespace Assets.Scripts
             return _savedObjectStates.TryGetValue(uniqueId, out state);
         }
 
-        public void SetCheckpoint(Vector3 checkpointPosition, int score)
+        public void SetCheckpoint(Vector3 checkpointPosition, int score, TransformationManager.PlayerMaterialType lastForm)
         {
             _lastCheckpointPositon = checkpointPosition;
             _lastScore = score;
-            Debug.Log($"Checkpoint set at position: {_lastCheckpointPositon}, score: {_lastScore}");
+            _lastForm = lastForm;
+            Debug.Log($"Checkpoint set at position: {_lastCheckpointPositon}, score: {_lastScore}, form: {_lastForm}");
 
             _savedObjectStates.Clear();
             foreach (var saveable in _registeredObjects)
@@ -64,7 +66,7 @@ namespace Assets.Scripts
                     _savedObjectStates[saveable.UniqueID] = saveable.CaptureState();
                 }
             }
-
+            _lastForm = lastForm;
             _hasCheckpoint = true;
             Debug.Log($"Saved states for {_savedObjectStates.Count} objects at checkpoint.");
         }
@@ -92,6 +94,7 @@ namespace Assets.Scripts
             _lastCheckpointPositon = Vector3.zero;
             _lastScore = 0;
             _hasCheckpoint = false;
+            _lastForm = TransformationManager.PlayerMaterialType.Planks;
             _registeredObjects.Clear();
             _savedObjectStates.Clear();
         }
