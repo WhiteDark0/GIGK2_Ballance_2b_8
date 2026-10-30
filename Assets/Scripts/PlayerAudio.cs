@@ -7,6 +7,7 @@ public class PlayerAudio : MonoBehaviour
     [SerializeField] private AudioClip ExtraLifeClip;
     [SerializeField] private AudioClip TransformClip;
     [SerializeField] private AudioClip BreakClip;
+    [SerializeField] private AudioClip CheckpointClip;
 
 
     [SerializeField]
@@ -23,5 +24,6 @@ public class PlayerAudio : MonoBehaviour
     public void PlayExtraLifeSound() => audioSource.PlayOneShot(ExtraLifeClip);
     public void PlayTransformSound() => audioSource.PlayOneShot(TransformClip);
     public void PlayBreakSound() => audioSource.PlayOneShot(BreakClip);
+    public void PlayCheckpointSound() => audioSource.PlayOneShot(CheckpointClip);
 
 }

@@ -191,6 +191,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Checkpoint"))
         {
             other.gameObject.SetActive(false);
+            playerAudio.PlayCheckpointSound();
             Assets.Scripts.CheckpointController.Instance.SetCheckpoint(other.transform.position, score, transformationManager.CurrentForm);
         }
     }

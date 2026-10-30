@@ -2365,6 +2365,7 @@ MonoBehaviour:
   ExtraLifeClip: {fileID: 8300000, guid: 12b5f84df5abf4d4f9a19349708f1ec9, type: 3}
   TransformClip: {fileID: 8300000, guid: 2d4c8d9608caabd43a330965ee573236, type: 3}
   BreakClip: {fileID: 8300000, guid: cd1d3a84d69e3f24a9af635fa56c0702, type: 3}
+  CheckpointClip: {fileID: 8300000, guid: 05112ac491fafa04097a7054861b5b09, type: 3}
   audioSource: {fileID: 941576425}
 --- !u!82 &941576427
 AudioSource:
