@@ -98,7 +98,7 @@ public class PlayerAudioMaterial : MonoBehaviour
 
         if (chosenClip != null && audioSource.clip != chosenClip)
         {
-            float playbackTime = audioSource.time;
+            float playbackTime = audioSource.clip != null ? audioSource.time : 0f;
             audioSource.clip = chosenClip;
             audioSource.time = playbackTime % chosenClip.length; // Maintain playback position
             if(targetVolume > 0f && !audioSource.isPlaying)
