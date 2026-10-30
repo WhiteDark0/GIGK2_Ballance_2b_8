@@ -12,6 +12,7 @@ TagManager:
   - ExtraLife
   - Material_Wood
   - Transformer
+  - Spike
   layers:
   - Default
   - TransparentFX

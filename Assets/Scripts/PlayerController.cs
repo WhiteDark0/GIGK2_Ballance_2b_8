@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
 
         if(this.transform.position.y < -10f && !isRespawning)
         {
+            playerAudio.PlayFallDownSound();
             StartCoroutine(Respawn());
         }
     }
@@ -92,8 +93,6 @@ public class PlayerController : MonoBehaviour
         isRespawning = true;
         lives--;
         SetLivesText();
-
-        playerAudio.PlayFallDownSound();
 
         if (lives <= 0)
         {
@@ -150,7 +149,15 @@ public class PlayerController : MonoBehaviour
             SetLivesText();
             playerAudio.PlayExtraLifeSound();
         }
-        if(other.gameObject.CompareTag("Transformer"))
+        if (other.gameObject.CompareTag("Spike"))
+        {
+            other.gameObject.SetActive(false);
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            playerAudio.PlayBreakSound();
+            StartCoroutine(Respawn());
+        }
+        if (other.gameObject.CompareTag("Transformer"))
         {
             other.gameObject.SetActive(false);
             // Get the touched transformer's component and apply the transformation using the TransformationManager
