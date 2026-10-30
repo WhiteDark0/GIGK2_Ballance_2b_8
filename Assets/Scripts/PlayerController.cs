@@ -172,6 +172,8 @@ public class PlayerController : MonoBehaviour
         {
             score += lives * 200; // Bonus points for remaining lives
 
+            playerAudio.PlayEndSound();
+
             isGameOver = true;
             other.gameObject.SetActive(false);
             scoreText.gameObject.SetActive(false);
@@ -198,7 +200,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator restartLevel()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(8f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
