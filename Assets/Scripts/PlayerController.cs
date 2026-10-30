@@ -174,6 +174,8 @@ public class PlayerController : MonoBehaviour
 
             playerAudio.PlayEndSound();
 
+            MusicManager.Instance.StopMusic();
+
             isGameOver = true;
             other.gameObject.SetActive(false);
             scoreText.gameObject.SetActive(false);
@@ -186,7 +188,7 @@ public class PlayerController : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
             transformationManager.ResetToDefault();
 
-            // Restart the level from scratch after 10 seconds
+            // Restart the level from scratch after 8 seconds
             Assets.Scripts.CheckpointController.Instance.ClearCheckpoints();
             StartCoroutine(restartLevel());
         }
@@ -201,6 +203,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator restartLevel()
     {
         yield return new WaitForSeconds(8f);
+        MusicManager.Instance.PlayMusic(MusicManager.Instance.DefaultClip);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

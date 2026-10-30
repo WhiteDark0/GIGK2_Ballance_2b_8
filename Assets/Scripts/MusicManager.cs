@@ -6,6 +6,8 @@ public class MusicManager : MonoBehaviour
 
     private AudioSource musicSource;
 
+    public AudioClip DefaultClip;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -23,7 +25,7 @@ public class MusicManager : MonoBehaviour
 
     public void PlayMusic(AudioClip clip, float volume = 0.1f)
     {
-        if (musicSource.clip == clip) return; // Avoid restarting the same music
+        if (musicSource.clip == clip && musicSource.isPlaying) return; // Avoid restarting the same music
         musicSource.clip = clip;
         musicSource.volume = volume;
         musicSource.loop = true;
