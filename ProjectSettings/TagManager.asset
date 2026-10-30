@@ -10,6 +10,7 @@ TagManager:
   - Material_Concrete
   - Material_Metal
   - ExtraLife
+  - Material_Wood
   layers:
   - Default
   - TransparentFX

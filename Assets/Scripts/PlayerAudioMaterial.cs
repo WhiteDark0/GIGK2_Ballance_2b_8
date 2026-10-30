@@ -9,6 +9,8 @@ public class PlayerAudioMaterial : MonoBehaviour
     private AudioClip concreteRollClip;
     [SerializeField]
     private AudioClip metalRollClip;
+    [SerializeField]
+    private AudioClip woodRollClip;
 
     private float minSpeed = 0.2f;
     private float maxSpeed = 12.0f;
@@ -85,6 +87,9 @@ public class PlayerAudioMaterial : MonoBehaviour
                 break;
             case "Material_Metal":
                 chosenClip = metalRollClip;
+                break;
+            case "Material_Wood":
+                chosenClip = woodRollClip;
                 break;
             default:
                 chosenClip = null;
