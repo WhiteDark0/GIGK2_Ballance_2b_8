@@ -14,6 +14,7 @@ public class SaveableObject : MonoBehaviour
 
     private Rigidbody _rb;
     private Rigidbody2D _rb2D;
+    private PlankBreaker _plankBreaker;
 
     public string UniqueID => _uniqueID;
 
@@ -28,6 +29,9 @@ public class SaveableObject : MonoBehaviour
         // Cache physics components if present
         _rb = GetComponent<Rigidbody>();
         _rb2D = GetComponent<Rigidbody2D>();
+
+        // Cache PlankBreaker component if present
+        _plankBreaker = GetComponent<PlankBreaker>();
 
         // Cache initial transforms for default resets
         _initialPosition = transform.position;
@@ -53,6 +57,12 @@ public class SaveableObject : MonoBehaviour
     public void RestoreState(ObjectState state)
     {
         gameObject.SetActive(state.IsActive);
+
+        if(_plankBreaker != null && state.IsActive)
+        {
+            _plankBreaker.ResetPlank();
+        }
+
         if(_saveTransform && state.IsActive)
         {
             ApplyTransform(state.Position, state.Rotation);
@@ -63,7 +73,12 @@ public class SaveableObject : MonoBehaviour
     {
         gameObject.SetActive(_initialActiveState);
 
-        if(_saveTransform && _initialActiveState)
+        if(_initialActiveState && _plankBreaker != null)
+        {
+            _plankBreaker.ResetPlank();
+        }
+
+        if (_saveTransform && _initialActiveState)
         {
             ApplyTransform(_initialPosition, _initialRotation);
         }

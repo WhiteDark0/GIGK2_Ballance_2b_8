@@ -16,6 +16,6 @@ public class ObjectAudio : MonoBehaviour
     }
 
     public void PlayCreakSound() => audioSource.PlayOneShot(CreakClip);
-    public void PlayBreakSound() => audioSource.PlayOneShot(BreakClip);
+    public void PlayBreakSound() => AudioSource.PlayClipAtPoint(BreakClip, transform.position);
 
 }

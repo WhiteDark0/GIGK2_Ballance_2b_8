@@ -8,6 +8,7 @@ public class PlankBreaker : MonoBehaviour
 
     private ObjectAudio objectAudio;
     private bool hasTriggered = false;
+    private Coroutine breakCoroutine;
 
     private void Start()
     {
@@ -18,7 +19,7 @@ public class PlankBreaker : MonoBehaviour
     {
         if (!hasTriggered && collision.gameObject.CompareTag(playerTag))
         {
-            StartCoroutine(BreakSequence());
+            breakCoroutine = StartCoroutine(BreakSequence());
         }
     }
 
@@ -26,7 +27,7 @@ public class PlankBreaker : MonoBehaviour
     {
         if (!hasTriggered && other.CompareTag(playerTag))
         {
-            StartCoroutine(BreakSequence());
+            breakCoroutine = StartCoroutine(BreakSequence());
         }
     }
 
@@ -47,8 +48,6 @@ public class PlankBreaker : MonoBehaviour
         }
 
         HideAndDisablePlank();
-
-        Destroy(gameObject, 1.5f);
     }
 
     private void HideAndDisablePlank()
@@ -61,6 +60,27 @@ public class PlankBreaker : MonoBehaviour
         foreach (Collider c in GetComponentsInChildren<Collider>())
         {
             c.enabled = false;
+        }
+
+        gameObject.SetActive(false);
+    }
+
+    public void ResetPlank()
+    {
+        if(breakCoroutine != null)
+        {
+            StopCoroutine(breakCoroutine);
+        }
+        hasTriggered = false;
+
+        foreach (Renderer r in GetComponentsInChildren<Renderer>(true))
+        {
+            r.enabled = true;
+        }
+
+        foreach (Collider c in GetComponentsInChildren<Collider>(true))
+        {
+            c.enabled = true;
         }
     }
 }
